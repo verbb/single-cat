@@ -1,0 +1,21 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Single Cat plugin for Craft CMS
+ *
+ * SingleCatField Field Settings
+ *
+ * @author    Eli Van Zoeren
+ * @copyright Copyright (c) 2018 Eli Van Zoeren
+ * @link      https://elivz.com
+ * @package   SingleCat
+ * @since     1.0.0
+ */
+#}
+{% extends "_components/fieldtypes/elementfieldsettings" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block fieldSettings %}
+    {{ block('sourcesField') }}
+{% endblock %}
