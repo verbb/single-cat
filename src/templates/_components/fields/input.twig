@@ -13,11 +13,13 @@
  */
 #}
 
+{%- set value = (value is defined and value != null ? value.id : null) %}
+
 <div class="select">
     <select id="name" name="{{ name }}[]">
         <option value=""></option>
         {% nav cat in categories %}
-            <option value="{{ cat.id }}"{% if value.id == cat.id %} selected{% endif %}>
+            <option value="{{ cat.id }}"{% if value == cat.id %} selected{% endif %}>
                 {%- for i in 0..(cat.level-1) if i > 0 %}&ndash;&nbsp;{% endfor -%}
                 {{ cat.title }}
             </option>
