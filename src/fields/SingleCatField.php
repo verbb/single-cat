@@ -114,7 +114,7 @@ class SingleCatField extends BaseRelationField
         }
 
         // Get all the categories in this group
-        $categories = Category::find()->groupId(1)->all();
+        $categories = Category::find()->groupId($source['structureId'])->all();
 
         // Render the input template
         return Craft::$app->getView()->renderTemplate(
