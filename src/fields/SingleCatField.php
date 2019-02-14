@@ -87,14 +87,14 @@ class SingleCatField extends BaseRelationField
     {
         if (is_array($value)) {
             /**
-             * @var Category[] $categories 
+             * @var Category[] $categories
              */
             $categories = Category::find()
                 ->siteId($this->targetSiteId($element))
                 ->id(array_values(array_filter($value)))
                 ->anyStatus()
                 ->all();
-                
+
                 // Enforce the branch limit
                 $categoriesService = Craft::$app->getCategories();
                 $categoriesService->applyBranchLimitToCategories($categories, $this->branchLimit);
@@ -120,12 +120,16 @@ class SingleCatField extends BaseRelationField
         }
 
         // Get all the categories in this group
-        $categories = Category::find()->groupId($source['criteria']['groupId'])->all();
+        $categories = Category::find()
+            ->groupId($source['criteria']['groupId'])
+            ->anyStatus()
+            ->all();
 
         // Get the element ID of the stored category
         /** @var CategoryQuery $value */
         $value = $value
             ->select(['elements.id'])
+            ->anyStatus()
             ->scalar();
 
         // Check whether blank option needs to be shown
