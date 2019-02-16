@@ -56,5 +56,12 @@ class SingleCat extends Plugin
                 $event->types[] = SingleCatFieldField::class;
             }
         );
+
+        // Register the field's schema for CraftQL support
+        Event::on(
+            SingleCatFieldField::class, 
+            'craftQlGetFieldSchema', 
+            [new \markhuot\CraftQL\Listeners\GetCategoriesFieldSchema, 'handle']
+        );
     }
 }
