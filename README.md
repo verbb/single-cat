@@ -8,6 +8,10 @@ You can switch back and forth freely between this and the native Category field,
 
 This plugin requires Craft CMS 3.1 or later.
 
+## Supports
+
+Support for [CraftQL](https://github.com/markhuot/craftql) is included. Single Cat fields may be accessed in the same way as native Categories fields.
+
 ## Installation
 
 To install the plugin, follow these instructions.
