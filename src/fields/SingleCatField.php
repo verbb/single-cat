@@ -10,6 +10,7 @@
 
 namespace elivz\singlecat\fields;
 
+use craft\elements\db\CategoryQuery;
 use elivz\singlecat\SingleCat;
 
 use Craft;
@@ -57,6 +58,11 @@ class SingleCatField extends BaseRelationField
      */
     public $branchLimit = 1;
 
+    /**
+     * @var bool Whether to show blank select option
+     */
+    public $showBlankOption = true;
+
     // Public Methods
     // =========================================================================
 
@@ -81,14 +87,14 @@ class SingleCatField extends BaseRelationField
     {
         if (is_array($value)) {
             /**
-             * @var Category[] $categories 
+             * @var Category[] $categories
              */
             $categories = Category::find()
                 ->siteId($this->targetSiteId($element))
                 ->id(array_values(array_filter($value)))
                 ->anyStatus()
                 ->all();
-                
+
                 // Enforce the branch limit
                 $categoriesService = Craft::$app->getCategories();
                 $categoriesService->applyBranchLimitToCategories($categories, $this->branchLimit);
@@ -114,17 +120,34 @@ class SingleCatField extends BaseRelationField
         }
 
         // Get all the categories in this group
-        $categories = Category::find()->groupId($source['criteria']['groupId'])->all();
+        $categories = Category::find()
+            ->groupId($source['criteria']['groupId'])
+            ->anyStatus()
+            ->all();
+
+        // Get the element ID of the stored category
+        /** @var CategoryQuery $value */
+        $value = $value
+            ->select(['elements.id'])
+            ->anyStatus()
+            ->scalar();
+
+        // Check whether blank option needs to be shown
+        $storedCategoryExists = $value !== false;
+        $isFresh = $element && $element->getHasFreshContent();
+
+        $showBlankOption = $this->showBlankOption || (!$storedCategoryExists && !$isFresh);
 
         // Render the input template
         return Craft::$app->getView()->renderTemplate(
             $this->inputTemplate,
             [
                 'name' => $this->handle,
-                'value' => $value->one(),
+                'value' => $value,
                 'field' => $this,
                 'source' => $source,
                 'categories' => $categories,
+                'showBlankOption' => $showBlankOption,
             ]
         );
     }

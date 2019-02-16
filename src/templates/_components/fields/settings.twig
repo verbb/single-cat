@@ -18,5 +18,13 @@
 
 {% block fieldSettings %}
     {{ block('sourcesField') }}
+
+    {{ forms.checkboxField({
+        label: "Show blank select option"|t('single-cat'),
+        name: 'showBlankOption',
+        id: 'showBlankOption',
+        checked: field.showBlankOption,
+    }) }}
+
     {{ block('advancedSettings') }}
 {% endblock %}
