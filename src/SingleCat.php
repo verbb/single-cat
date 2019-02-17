@@ -58,10 +58,12 @@ class SingleCat extends Plugin
         );
 
         // Register the field's schema for CraftQL support
-        Event::on(
-            SingleCatFieldField::class, 
-            'craftQlGetFieldSchema', 
-            [new \markhuot\CraftQL\Listeners\GetCategoriesFieldSchema, 'handle']
-        );
+        if (Craft::$app->getPlugins()->getPlugin('craftql')) {
+            Event::on(
+                SingleCatFieldField::class,
+                'craftQlGetFieldSchema',
+                [new \markhuot\CraftQL\Listeners\GetCategoriesFieldSchema, 'handle']
+            );
+        }
     }
 }
