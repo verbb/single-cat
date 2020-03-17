@@ -123,6 +123,7 @@ class SingleCatField extends BaseRelationField
         $categories = Category::find()
             ->groupId($source['criteria']['groupId'])
             ->anyStatus()
+	        ->orderBy('title')
             ->all();
 
         // Get the element ID of the stored category
