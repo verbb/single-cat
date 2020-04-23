@@ -23,6 +23,14 @@ use craft\helpers\Db;
 use craft\helpers\ElementHelper;
 use yii\db\Schema;
 use craft\helpers\Json;
+use craft\db\Table as DbTable;
+
+use craft\gql\arguments\elements\Category as CategoryArguments;
+use craft\gql\interfaces\elements\Category as CategoryInterface;
+use craft\gql\resolvers\elements\Category as CategoryResolver;
+
+use craft\helpers\Gql;
+use GraphQL\Type\Definition\Type;
 
 /**
  * @author  Eli Van Zoeren
@@ -150,5 +158,37 @@ class SingleCatField extends BaseRelationField
                 'showBlankOption' => $showBlankOption,
             ]
         );
+    }
+    
+    /**
+     * @inheritdoc
+     * @since 3.3.0
+     */
+    public function getContentGqlType()
+    {
+        return [
+            'name' => $this->handle,
+            'type' => Type::listOf(CategoryInterface::getType()),
+            'args' => CategoryArguments::getArguments(),
+            'resolve' => CategoryResolver::class . '::resolve',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     * @since 3.3.0
+     */
+    public function getEagerLoadingGqlConditions()
+    {
+        $allowedEntities = Gql::extractAllowedEntitiesFromSchema();
+        $allowedCategoryUids = $allowedEntities['categorygroups'] ?? [];
+
+        if (empty($allowedCategoryUids)) {
+            return false;
+        }
+
+        $categoryIds = Db::idsByUids(DbTable::CATEGORYGROUPS, $allowedCategoryUids);
+
+        return ['groupId' => array_values($categoryIds)];
     }
 }
