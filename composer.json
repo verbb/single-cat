@@ -12,14 +12,18 @@
     "single category"
   ],
   "support": {
-    "docs": "https://github.com/elivz/craft-single-cat/blob/master/README.md",
-    "issues": "https://github.com/elivz/craft-single-cat/issues"
+    "docs": "https://github.com/ynmstudio/craft-single-cat/blob/master/README.md",
+    "issues": "https://github.com/ynmstudio/craft-single-cat/issues"
   },
   "license": "MIT",
   "authors": [
     {
       "name": "Eli Van Zoeren",
       "homepage": "https://elivz.com"
+    },
+    {
+      "name": "Denis Yilmaz",
+      "homepage": "https://ynm.studio"
     }
   ],
   "require": {
@@ -33,7 +37,7 @@
   "extra": {
     "name": "Single Cat",
     "handle": "single-cat",
-    "changelogUrl": "https://raw.githubusercontent.com/elivz/craft-single-cat/master/CHANGELOG.md",
+    "changelogUrl": "https://raw.githubusercontent.com/ynmstudio/craft-single-cat/master/CHANGELOG.md",
     "class": "elivz\\singlecat\\SingleCat"
   }
 }
