@@ -1,8 +1,8 @@
 {
-  "name": "ynmstudio/craft-single-cat",
+  "name": "elivz/craft-single-cat",
   "description": "Field type that allows the user to select a single category from a drop-down.",
   "type": "craft-plugin",
-  "version": "dev-1.2.1",
+  "version": "dev-1.2.2",
   "keywords": [
     "craftcms",
     "craft-plugin",
@@ -12,8 +12,8 @@
     "single category"
   ],
   "support": {
-    "docs": "https://github.com/ynmstudio/craft-single-cat/blob/master/README.md",
-    "issues": "https://github.com/ynmstudio/craft-single-cat/issues"
+    "docs": "https://github.com/elivz/craft-single-cat/blob/master/README.md",
+    "issues": "https://github.com/elivz/craft-single-cat/issues"
   },
   "license": "MIT",
   "authors": [
@@ -37,7 +37,7 @@
   "extra": {
     "name": "Single Cat",
     "handle": "single-cat",
-    "changelogUrl": "https://raw.githubusercontent.com/ynmstudio/craft-single-cat/master/CHANGELOG.md",
+    "changelogUrl": "https://raw.githubusercontent.com/elivz/craft-single-cat/master/CHANGELOG.md",
     "class": "elivz\\singlecat\\SingleCat"
   }
 }
