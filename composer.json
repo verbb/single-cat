@@ -1,5 +1,5 @@
 {
-  "name": "elivz/craft-single-cat",
+  "name": "ynmstudio/craft-single-cat",
   "description": "Field type that allows the user to select a single category from a drop-down.",
   "type": "craft-plugin",
   "version": "1.2.2",
