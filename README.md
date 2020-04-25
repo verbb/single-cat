@@ -15,7 +15,7 @@ This fork is only here to stay until the fix in merged back into the main repo `
 - add following to the end of you composer.json object:
 ```json
 {
-    // ... ,
+    …
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
