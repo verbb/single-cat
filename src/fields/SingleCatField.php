@@ -122,6 +122,7 @@ class SingleCatField extends BaseRelationField
         // Get all the categories in this group
         $categories = Category::find()
             ->groupId($source['criteria']['groupId'])
+            ->siteId($this->targetSiteId($element))
             ->anyStatus()
             ->all();
 
