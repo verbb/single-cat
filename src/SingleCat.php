@@ -10,15 +10,13 @@
 
 namespace elivz\singlecat;
 
-use elivz\singlecat\fields\SingleCatField as SingleCatFieldField;
-
 use Craft;
 use craft\base\Plugin;
-use craft\services\Plugins;
 use craft\events\PluginEvent;
-use craft\services\Fields;
 use craft\events\RegisterComponentTypesEvent;
-
+use craft\services\Fields;
+use craft\services\Plugins;
+use elivz\singlecat\fields\SingleCatField as SingleCatFieldField;
 use yii\base\Event;
 
 /**
