@@ -10,19 +10,19 @@
 
 namespace elivz\singlecat\fields;
 
-use craft\elements\db\CategoryQuery;
-use elivz\singlecat\SingleCat;
-
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\elements\Category;
+use craft\elements\db\CategoryQuery;
 use craft\fields\BaseRelationField;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Db;
 use craft\helpers\ElementHelper;
-use yii\db\Schema;
 use craft\helpers\Json;
+
+use yii\db\Schema;
+
 use craft\db\Table as DbTable;
 
 use craft\gql\arguments\elements\Category as CategoryArguments;
@@ -103,9 +103,9 @@ class SingleCatField extends BaseRelationField
                 ->anyStatus()
                 ->all();
 
-                // Enforce the branch limit
-                $categoriesService = Craft::$app->getCategories();
-                $categoriesService->applyBranchLimitToCategories($categories, $this->branchLimit);
+            // Enforce the branch limit
+            $categoriesService = Craft::$app->getCategories();
+            $categoriesService->applyBranchLimitToCategories($categories, $this->branchLimit);
 
             $value = ArrayHelper::getColumn($categories, 'id');
         }
@@ -130,6 +130,7 @@ class SingleCatField extends BaseRelationField
         // Get all the categories in this group
         $categories = Category::find()
             ->groupId($source['criteria']['groupId'])
+            ->siteId($this->targetSiteId($element))
             ->anyStatus()
             ->all();
 
