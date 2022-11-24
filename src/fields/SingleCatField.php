@@ -11,6 +11,7 @@ use craft\gql\arguments\elements\Category as CategoryArguments;
 use craft\gql\interfaces\elements\Category as CategoryInterface;
 use craft\gql\resolvers\elements\Category as CategoryResolver;
 use craft\helpers\ArrayHelper;
+use craft\helpers\Db;
 use craft\helpers\ElementHelper;
 use craft\helpers\Gql;
 
@@ -121,7 +122,7 @@ class SingleCatField extends BaseRelationField
         ]);
     }
 
-    public function getContentGqlType()
+    public function getContentGqlType(): array
     {
         return [
             'name' => $this->handle,
