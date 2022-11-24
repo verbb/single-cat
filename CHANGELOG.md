@@ -4,6 +4,9 @@
 
 > {note} The plugin’s package name has changed to `verbb/single-cat`. Single Cat will need be updated to 2.0 from a terminal, by running `composer require verbb/single-cat && composer remove elivz/craft-single-cat`.
 
+### Added
+- Add GraphQL support for field. (thanks @denisyilmaz).
+
 ### Changed
 - Migration to `verbb/single-cat`.
 - Now requires Craft 3.7+.
