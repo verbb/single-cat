@@ -3,11 +3,18 @@ namespace verbb\singlecat\fields;
 
 use Craft;
 use craft\base\ElementInterface;
+use craft\db\Table;
 use craft\elements\Category;
 use craft\elements\db\CategoryQuery;
 use craft\fields\BaseRelationField;
+use craft\gql\arguments\elements\Category as CategoryArguments;
+use craft\gql\interfaces\elements\Category as CategoryInterface;
+use craft\gql\resolvers\elements\Category as CategoryResolver;
 use craft\helpers\ArrayHelper;
 use craft\helpers\ElementHelper;
+use craft\helpers\Gql;
+
+use GraphQL\Type\Definition\Type;
 
 class SingleCatField extends BaseRelationField
 {
@@ -112,5 +119,29 @@ class SingleCatField extends BaseRelationField
             'categories' => $categories,
             'showBlankOption' => $showBlankOption,
         ]);
+    }
+
+    public function getContentGqlType()
+    {
+        return [
+            'name' => $this->handle,
+            'type' => Type::listOf(CategoryInterface::getType()),
+            'args' => CategoryArguments::getArguments(),
+            'resolve' => CategoryResolver::class . '::resolve',
+        ];
+    }
+
+    public function getEagerLoadingGqlConditions()
+    {
+        $allowedEntities = Gql::extractAllowedEntitiesFromSchema();
+        $allowedCategoryUids = $allowedEntities['categorygroups'] ?? [];
+
+        if (empty($allowedCategoryUids)) {
+            return false;
+        }
+
+        $categoryIds = Db::idsByUids(Table::CATEGORYGROUPS, $allowedCategoryUids);
+
+        return ['groupId' => array_values($categoryIds)];
     }
 }
