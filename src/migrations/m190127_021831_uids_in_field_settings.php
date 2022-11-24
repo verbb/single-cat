@@ -42,7 +42,7 @@ class m190127_021831_uids_in_field_settings extends Migration
                 $settings['targetSiteId'] = $sites[$settings['targetSiteId']] ?? null;
             }
 
-            if (!empty($settings['source']) && strpos($settings['source'], ':') !== false) {
+            if (!empty($settings['source']) && str_contains($settings['source'], ':')) {
                 $source = explode(':', $settings['source']);
                 $settings['source'] = $source[0] . ':' . ($categoryGroups[$source[1]] ?? $source[1]);
             }

@@ -6,7 +6,7 @@
 
         {% nav cat in categories %}
             <option value="{{ cat.id }}"{% if value == cat.id %} selected{% endif %}>
-                {%- for i in 0..(cat.level-1) if i > 0 %}&ndash;&nbsp;{% endfor -%}
+                {%- for i in 0..(cat.level-1) -%}{%- if i > 0 -%}&ndash;&nbsp;{%- endif -%}{%- endfor -%}
                 {{ cat.title }}
             </option>
             

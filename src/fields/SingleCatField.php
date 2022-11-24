@@ -27,7 +27,7 @@ class SingleCatField extends BaseRelationField
         return Craft::t('single-cat', 'Single Category');
     }
 
-    protected static function elementType(): string
+    public static function elementType(): string
     {
         return Category::class;
     }
@@ -36,15 +36,8 @@ class SingleCatField extends BaseRelationField
     // Properties
     // =========================================================================
 
-    /**
-     * @var int|null Branch limit
-     */
-    public $branchLimit = 1;
-
-    /**
-     * @var bool Whether to show blank select option
-     */
-    public $showBlankOption = true;
+    public ?int $branchLimit = 1;
+    public bool $showBlankOption = true;
 
 
     // Public Methods
@@ -62,13 +55,13 @@ class SingleCatField extends BaseRelationField
         $this->sortable = false;
     }
 
-    public function normalizeValue($value, ElementInterface $element = null)
+    public function normalizeValue($value, ElementInterface $element = null): mixed
     {
         if (is_array($value)) {
             $categories = Category::find()
                 ->siteId($this->targetSiteId($element))
                 ->id(array_values(array_filter($value)))
-                ->anyStatus()
+                ->status(null)
                 ->all();
 
             // Enforce the branch limit
@@ -95,14 +88,14 @@ class SingleCatField extends BaseRelationField
         $categories = Category::find()
             ->groupId($source['criteria']['groupId'])
             ->siteId($this->targetSiteId($element))
-            ->anyStatus()
+            ->status(null)
             ->all();
 
         // Get the element ID of the stored category
         /** @var CategoryQuery $value */
         $value = $value
             ->select(['elements.id'])
-            ->anyStatus()
+            ->status(null)
             ->scalar();
 
         // Check whether blank option needs to be shown
@@ -132,13 +125,13 @@ class SingleCatField extends BaseRelationField
         ];
     }
 
-    public function getEagerLoadingGqlConditions()
+    public function getEagerLoadingGqlConditions(): array|null
     {
         $allowedEntities = Gql::extractAllowedEntitiesFromSchema();
         $allowedCategoryUids = $allowedEntities['categorygroups'] ?? [];
 
         if (empty($allowedCategoryUids)) {
-            return false;
+            return null;
         }
 
         $categoryIds = Db::idsByUids(Table::CATEGORYGROUPS, $allowedCategoryUids);
