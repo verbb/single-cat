@@ -1,67 +1,52 @@
 <?php
-/**
- * Single Cat plugin for Craft CMS 3.x
- *
- * Fieldtype that allows the user to select a single category from a drop-down.
- *
- * @link      https://elivz.com
- * @copyright Copyright (c) 2018 Eli Van Zoeren
- */
+namespace verbb\singlecat;
 
-namespace elivz\singlecat;
+use verbb\singlecat\base\PluginTrait;
+use verbb\singlecat\fields\SingleCatField;
 
-use Craft;
 use craft\base\Plugin;
-use craft\events\PluginEvent;
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Fields;
-use craft\services\Plugins;
-use elivz\singlecat\fields\SingleCatField as SingleCatFieldField;
+
 use yii\base\Event;
 
-/**
- * Class SingleCat
- *
- * @author  Eli Van Zoeren
- * @package SingleCat
- * @since   1.0.0
- */
 class SingleCat extends Plugin
 {
-    // Public Properties
+    // Properties
     // =========================================================================
 
-    /**
-     * @var string
-     */
     public $schemaVersion = '1.1.0';
+
+
+    // Traits
+    // =========================================================================
+
+    use PluginTrait;
+
 
     // Public Methods
     // =========================================================================
 
-    /**
-     * @inheritdoc
-     */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
-        // Register the field type
-        Event::on(
-            Fields::class,
-            Fields::EVENT_REGISTER_FIELD_TYPES,
-            function (RegisterComponentTypesEvent $event) {
-                $event->types[] = SingleCatFieldField::class;
-            }
-        );
+        self::$plugin = $this;
 
-        // Register the field's schema for CraftQL support
-        if (Craft::$app->getPlugins()->getPlugin('craftql')) {
-            Event::on(
-                SingleCatFieldField::class,
-                'craftQlGetFieldSchema',
-                [new \markhuot\CraftQL\Listeners\GetCategoriesFieldSchema, 'handle']
-            );
-        }
+        $this->_setPluginComponents();
+        $this->_setLogging();
+        $this->_registerFieldTypes();
     }
+
+
+    // Private Methods
+    // =========================================================================
+
+    private function _registerFieldTypes(): void
+    {
+        Event::on(Fields::class, Fields::EVENT_REGISTER_FIELD_TYPES, function(RegisterComponentTypesEvent $event) {
+            $event->types[] = SingleCatField::class;
+        });
+    }
+
 }

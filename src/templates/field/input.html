@@ -1,18 +1,3 @@
-{# @var craft \craft\web\twig\variables\CraftVariable #}
-{#
-/**
- * Single Cat plugin for Craft CMS 3.x
- *
- * SingleCatField Field Input
- *
- * @author    Eli Van Zoeren
- * @copyright Copyright (c) 2018 Eli Van Zoeren
- * @link      https://elivz.com
- * @package   SingleCat
- * @since     1.0.0
- */
-#}
-
 <div class="select">
     <select id="name" name="{{ name }}[]">
         {% if showBlankOption %}
@@ -24,6 +9,7 @@
                 {%- for i in 0..(cat.level-1) if i > 0 %}&ndash;&nbsp;{% endfor -%}
                 {{ cat.title }}
             </option>
+            
             {% children %}
         {% endnav %}
     </select>

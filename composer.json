@@ -1,39 +1,49 @@
 {
-  "name": "elivz/craft-single-cat",
-  "description": "Field type that allows the user to select a single category from a drop-down.",
-  "type": "craft-plugin",
-  "version": "1.2.2",
-  "keywords": [
-    "craftcms",
-    "craft-plugin",
-    "single cat",
-    "category",
-    "select",
-    "single category"
-  ],
-  "support": {
-    "docs": "https://github.com/elivz/craft-single-cat/blob/master/README.md",
-    "issues": "https://github.com/elivz/craft-single-cat/issues"
-  },
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Eli Van Zoeren",
-      "homepage": "https://elivz.com"
+    "name": "verbb/single-cat",
+    "description": "A field type to allow users to select a single category from a dropdown.",
+    "type": "craft-plugin",
+    "version": "2.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "single cat",
+        "category",
+        "select",
+        "single category"
+    ],
+    "support": {
+        "email": "support@verbb.io",
+        "issues": "https://github.com/verbb/single-cat/issues?state=open",
+        "source": "https://github.com/verbb/single-cat",
+        "docs": "https://github.com/verbb/single-cat",
+        "rss": "https://github.com/verbb/single-cat/commits/v2.atom"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Verbb",
+            "homepage": "https://verbb.io"
+        },
+        {
+            "name": "Eli Van Zoeren",
+            "homepage": "https://elivz.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.7.0",
+        "verbb/base": "^1.0.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "verbb\\singlecat\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Single Cat",
+        "handle": "single-cat",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/single-cat/craft-3/CHANGELOG.md",
+        "class": "verbb\\singlecat\\SingleCat"
     }
-  ],
-  "require": {
-    "craftcms/cms": "^3.1.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "elivz\\singlecat\\": "src/"
-    }
-  },
-  "extra": {
-    "name": "Single Cat",
-    "handle": "single-cat",
-    "changelogUrl": "https://raw.githubusercontent.com/elivz/craft-single-cat/master/CHANGELOG.md",
-    "class": "elivz\\singlecat\\SingleCat"
-  }
 }

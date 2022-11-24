@@ -1,52 +1,29 @@
 <?php
-/**
- * Single Cat plugin for Craft CMS 3.x
- *
- * Fieldtype that allows the user to select a single category from a drop-down.
- *
- * @link      https://elivz.com
- * @copyright Copyright (c) 2018 Eli Van Zoeren
- */
-
-namespace elivz\singlecat\fields;
+namespace verbb\singlecat\fields;
 
 use Craft;
 use craft\base\ElementInterface;
-use craft\base\Field;
 use craft\elements\Category;
 use craft\elements\db\CategoryQuery;
 use craft\fields\BaseRelationField;
 use craft\helpers\ArrayHelper;
-use craft\helpers\Db;
 use craft\helpers\ElementHelper;
-use craft\helpers\Json;
-use yii\db\Schema;
 
-/**
- * @author  Eli Van Zoeren
- * @package SingleCat
- * @since   1.0.0
- */
 class SingleCatField extends BaseRelationField
 {
     // Static Methods
     // =========================================================================
 
-    /**
-     * @inheritdoc
-     */
     public static function displayName(): string
     {
         return Craft::t('single-cat', 'Single Category');
     }
 
-    /**
-     * @inheritdoc
-     */
     protected static function elementType(): string
     {
         return Category::class;
     }
+
 
     // Properties
     // =========================================================================
@@ -61,32 +38,25 @@ class SingleCatField extends BaseRelationField
      */
     public $showBlankOption = true;
 
+
     // Public Methods
     // =========================================================================
 
-    /**
-     * @inheritdoc
-     */
-    public function init()
+    public function init(): void
     {
         parent::init();
+
         $this->allowLimit = false;
         $this->allowMultipleSources = false;
-        $this->settingsTemplate = 'single-cat/_components/fields/settings';
-        $this->inputTemplate = 'single-cat/_components/fields/input';
+        $this->settingsTemplate = 'single-cat/field/settings';
+        $this->inputTemplate = 'single-cat/field/input';
         $this->inputJsClass = false;
         $this->sortable = false;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function normalizeValue($value, ElementInterface $element = null)
     {
         if (is_array($value)) {
-            /**
-             * @var Category[] $categories
-             */
             $categories = Category::find()
                 ->siteId($this->targetSiteId($element))
                 ->id(array_values(array_filter($value)))
@@ -94,8 +64,7 @@ class SingleCatField extends BaseRelationField
                 ->all();
 
             // Enforce the branch limit
-            $categoriesService = Craft::$app->getCategories();
-            $categoriesService->applyBranchLimitToCategories($categories, $this->branchLimit);
+            Craft::$app->getStructures()->applyBranchLimitToElements($categories, $this->branchLimit);
 
             $value = ArrayHelper::getColumn($categories, 'id');
         }
@@ -103,9 +72,6 @@ class SingleCatField extends BaseRelationField
         return parent::normalizeValue($value, $element);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
         // Make sure the field is set to a valid category group
@@ -133,21 +99,18 @@ class SingleCatField extends BaseRelationField
 
         // Check whether blank option needs to be shown
         $storedCategoryExists = $value !== false;
-        $isFresh = $element && $element->getHasFreshContent();
+        $isFresh = $element && $element->getIsFresh();
 
         $showBlankOption = $this->showBlankOption || (!$storedCategoryExists && !$isFresh);
 
         // Render the input template
-        return Craft::$app->getView()->renderTemplate(
-            $this->inputTemplate,
-            [
-                'name' => $this->handle,
-                'value' => $value,
-                'field' => $this,
-                'source' => $source,
-                'categories' => $categories,
-                'showBlankOption' => $showBlankOption,
-            ]
-        );
+        return Craft::$app->getView()->renderTemplate($this->inputTemplate, [
+            'name' => $this->handle,
+            'value' => $value,
+            'field' => $this,
+            'source' => $source,
+            'categories' => $categories,
+            'showBlankOption' => $showBlankOption,
+        ]);
     }
 }

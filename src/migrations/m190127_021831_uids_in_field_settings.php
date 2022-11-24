@@ -1,23 +1,19 @@
 <?php
+namespace verbb\singlecat\migrations;
 
-namespace elivz\singlecat\migrations;
+use verbb\singlecat\fields\SingleCatField;
 
-use Craft;
 use craft\db\Migration;
 use craft\db\Query;
 use craft\db\Table;
 use craft\helpers\Json;
-use elivz\singlecat\fields\SingleCatField;
 
-/**
- * m190127_021831_uids_in_field_settings migration.
- */
 class m190127_021831_uids_in_field_settings extends Migration
 {
-    /**
-     * @inheritdoc
-     */
-    public function safeUp()
+    // Public Methods
+    // =========================================================================
+
+    public function safeUp(): bool
     {
         $fields = (new Query())
             ->select(['id', 'settings'])
@@ -59,10 +55,7 @@ class m190127_021831_uids_in_field_settings extends Migration
         return true;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function safeDown()
+    public function safeDown(): bool
     {
         echo "m190127_021831_uids_in_field_settings cannot be reverted.\n";
         return false;

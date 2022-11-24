@@ -1,0 +1,16 @@
+{% extends '_components/fieldtypes/elementfieldsettings' %}
+
+{% import '_includes/forms' as forms %}
+
+{% block fieldSettings %}
+    {{ block('sourcesField') }}
+
+    {{ forms.checkboxField({
+        label: 'Show blank select option' | t('single-cat'),
+        name: 'showBlankOption',
+        id: 'showBlankOption',
+        checked: field.showBlankOption,
+    }) }}
+
+    {{ block('advancedSettings') }}
+{% endblock %}
