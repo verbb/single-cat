@@ -21,19 +21,19 @@ trait PluginTrait
     public static function log($message, $attributes = []): void
     {
         if ($attributes) {
-            $message = Craft::t('singlcat', $message, $attributes);
+            $message = Craft::t('single-cat', $message, $attributes);
         }
 
-        Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'singlcat');
+        Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'single-cat');
     }
 
     public static function error($message, $attributes = []): void
     {
         if ($attributes) {
-            $message = Craft::t('singlcat', $message, $attributes);
+            $message = Craft::t('single-cat', $message, $attributes);
         }
 
-        Craft::getLogger()->log($message, Logger::LEVEL_ERROR, 'singlcat');
+        Craft::getLogger()->log($message, Logger::LEVEL_ERROR, 'single-cat');
     }
 
 
@@ -47,7 +47,7 @@ trait PluginTrait
 
     private function _setLogging(): void
     {
-        BaseHelper::setFileLogging('singlcat');
+        BaseHelper::setFileLogging('single-cat');
     }
 
 }
