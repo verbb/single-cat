@@ -15,7 +15,7 @@ class SingleCat extends Plugin
     // Properties
     // =========================================================================
 
-    public $schemaVersion = '1.1.0';
+    public $schemaVersion = '2.0.0';
 
 
     // Traits
