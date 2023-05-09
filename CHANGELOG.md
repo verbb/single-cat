@@ -1,9 +1,14 @@
 # Changelog
 
+## 3.0.3 - 2023-05-10
+
+### Fixed
+Fix an issue with Craft 4.4+ and `branchLimit`.
+
 ## 3.0.2 - 2023-05-09
 
 ### Fixed
-Fix an issue with Craft 4.4+ and `source` setting
+Fix an issue with Craft 4.4+ and `source` setting.
 
 ## 3.0.1 - 2022-11-30
 
