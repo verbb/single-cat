@@ -38,22 +38,17 @@ class SingleCatField extends BaseRelationField
 
     public ?int $branchLimit = 1;
     public bool $showBlankOption = true;
+    public bool $allowMultipleSources = false;
+    public bool $allowLimit = false;
+
+    protected string $settingsTemplate = 'single-cat/field/settings';
+    protected string $inputTemplate = 'single-cat/field/input';
+    protected ?string $inputJsClass = null;
+    protected bool $sortable = false;
 
 
     // Public Methods
     // =========================================================================
-
-    public function init(): void
-    {
-        parent::init();
-
-        $this->allowLimit = false;
-        $this->allowMultipleSources = false;
-        $this->settingsTemplate = 'single-cat/field/settings';
-        $this->inputTemplate = 'single-cat/field/input';
-        $this->inputJsClass = false;
-        $this->sortable = false;
-    }
 
     public function normalizeValue($value, ElementInterface $element = null): mixed
     {
