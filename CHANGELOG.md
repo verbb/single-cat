@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.2 - 2023-05-09
+
+### Fixed
+Fix an issue with Craft 4.4+ and `source` setting
+
 ## 3.0.1 - 2022-11-30
 
 ### Fixed
