@@ -60,7 +60,9 @@ class SingleCatField extends BaseRelationField
                 ->all();
 
             // Enforce the branch limit
-            Craft::$app->getStructures()->applyBranchLimitToElements($categories, $this->branchLimit);
+            if ($this->branchLimit) {
+                Craft::$app->getStructures()->applyBranchLimitToElements($categories, $this->branchLimit);
+            }
 
             $value = ArrayHelper::getColumn($categories, 'id');
         }
