@@ -2,7 +2,7 @@
     "name": "verbb/single-cat",
     "description": "A field type to allow users to select a single category from a dropdown.",
     "type": "craft-plugin",
-    "version": "3.0.3",
+    "version": "4.0.0-beta.1",
     "keywords": [
         "craft",
         "cms",
@@ -32,8 +32,8 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^4.0.0",
-        "verbb/base": "^2.0.0"
+        "craftcms/cms": "^5.0.0-alpha.1",
+        "verbb/base": "^3.0.0-beta.1"
     },
     "autoload": {
         "psr-4": {
@@ -43,7 +43,7 @@
     "extra": {
         "name": "Single Cat",
         "handle": "single-cat",
-        "changelogUrl": "https://raw.githubusercontent.com/verbb/single-cat/craft-4/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/single-cat/craft-5/CHANGELOG.md",
         "class": "verbb\\singlecat\\SingleCat"
     }
 }

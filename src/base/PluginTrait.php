@@ -3,53 +3,31 @@ namespace verbb\singlecat\base;
 
 use verbb\singlecat\SingleCat;
 
-use Craft;
-
-use yii\log\Logger;
-
-use verbb\base\BaseHelper;
+use verbb\base\LogTrait;
+use verbb\base\helpers\Plugin;
 
 trait PluginTrait
 {
-    // Static Properties
+    // Properties
     // =========================================================================
 
-    public static SingleCat $plugin;
+    public static ?SingleCat $plugin = null;
 
 
-    // Public Methods
+    // Traits
     // =========================================================================
 
-    public static function log($message, $attributes = []): void
-    {
-        if ($attributes) {
-            $message = Craft::t('single-cat', $message, $attributes);
-        }
+    use LogTrait;
+    
 
-        Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'single-cat');
-    }
-
-    public static function error($message, $attributes = []): void
-    {
-        if ($attributes) {
-            $message = Craft::t('single-cat', $message, $attributes);
-        }
-
-        Craft::getLogger()->log($message, Logger::LEVEL_ERROR, 'single-cat');
-    }
-
-
-    // Private Methods
+    // Static Methods
     // =========================================================================
 
-    private function _setPluginComponents(): void
+    public static function config(): array
     {
-        BaseHelper::registerModule();
-    }
+        Plugin::bootstrapPlugin('single-cat');
 
-    private function _setLogging(): void
-    {
-        BaseHelper::setFileLogging('single-cat');
+        return [];
     }
 
 }

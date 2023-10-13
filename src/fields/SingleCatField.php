@@ -50,7 +50,7 @@ class SingleCatField extends BaseRelationField
     // Public Methods
     // =========================================================================
 
-    public function normalizeValue($value, ElementInterface $element = null): mixed
+    public function normalizeValue(mixed $value, ElementInterface $element = null): mixed
     {
         if (is_array($value)) {
             $categories = Category::find()
@@ -70,7 +70,7 @@ class SingleCatField extends BaseRelationField
         return parent::normalizeValue($value, $element);
     }
 
-    public function getInputHtml($value, ElementInterface $element = null): string
+    protected function inputHtml(mixed $value, ?ElementInterface $element, bool $inline): string
     {
         // Make sure the field is set to a valid category group
         if ($this->source) {
