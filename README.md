@@ -1,5 +1,5 @@
 # Single Cat plugin for Craft CMS
-<img width="500" src="https://verbb.imgix.net/plugins/single-cat/single-cat-social-card.png?v=1">
+<img width="500" src="https://verbb.imgix.net/plugins/single-cat/single-cat-social-card.png?v=2">
 
 Single Cat is a Craft CMS plugin to allow selecting a single category, via a dropdown instead of an element select field.
 
