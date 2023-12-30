@@ -70,6 +70,34 @@ class SingleCatField extends BaseRelationField
         return parent::normalizeValue($value, $element);
     }
 
+    public function getContentGqlType(): array
+    {
+        return [
+            'name' => $this->handle,
+            'type' => Type::listOf(CategoryInterface::getType()),
+            'args' => CategoryArguments::getArguments(),
+            'resolve' => CategoryResolver::class . '::resolve',
+        ];
+    }
+
+    public function getEagerLoadingGqlConditions(): array|null
+    {
+        $allowedEntities = Gql::extractAllowedEntitiesFromSchema();
+        $allowedCategoryUids = $allowedEntities['categorygroups'] ?? [];
+
+        if (empty($allowedCategoryUids)) {
+            return null;
+        }
+
+        $categoryIds = Db::idsByUids(Table::CATEGORYGROUPS, $allowedCategoryUids);
+
+        return ['groupId' => array_values($categoryIds)];
+    }
+
+    
+    // Protected Methods
+    // =========================================================================
+
     protected function inputHtml(mixed $value, ?ElementInterface $element, bool $inline): string
     {
         // Make sure the field is set to a valid category group
@@ -110,29 +138,5 @@ class SingleCatField extends BaseRelationField
             'categories' => $categories,
             'showBlankOption' => $showBlankOption,
         ]);
-    }
-
-    public function getContentGqlType(): array
-    {
-        return [
-            'name' => $this->handle,
-            'type' => Type::listOf(CategoryInterface::getType()),
-            'args' => CategoryArguments::getArguments(),
-            'resolve' => CategoryResolver::class . '::resolve',
-        ];
-    }
-
-    public function getEagerLoadingGqlConditions(): array|null
-    {
-        $allowedEntities = Gql::extractAllowedEntitiesFromSchema();
-        $allowedCategoryUids = $allowedEntities['categorygroups'] ?? [];
-
-        if (empty($allowedCategoryUids)) {
-            return null;
-        }
-
-        $categoryIds = Db::idsByUids(Table::CATEGORYGROUPS, $allowedCategoryUids);
-
-        return ['groupId' => array_values($categoryIds)];
     }
 }
