@@ -27,6 +27,11 @@ class SingleCatField extends BaseRelationField
         return Craft::t('single-cat', 'Single Category');
     }
 
+    public static function icon(): string
+    {
+        return 'cat';
+    }
+
     public static function elementType(): string
     {
         return Category::class;
