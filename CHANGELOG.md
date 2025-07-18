@@ -1,10 +1,9 @@
 # Changelog
 
-## 4.0.0 - 2024-0053-12
+## 3.0.4 - 2025-07-18
 
 ### Changed
-- Now requires PHP `8.2.0+`.
-- Now requires Craft `5.0.0+`.
+- Update English translations.
 
 ## 3.0.3 - 2023-05-10
 
