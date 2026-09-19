@@ -3,6 +3,8 @@
 
 Single Cat is a Craft CMS plugin to allow selecting a single category, via a dropdown instead of an element select field.
 
+The selected category remains available as a native Craft element in Twig and GraphQL.
+
 ## Documentation
 Visit the [Single Cat Plugin page](https://verbb.io/craft-plugins/single-cat) for all documentation, guides, pricing and developer resources.
 
