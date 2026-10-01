@@ -99,7 +99,7 @@ class SingleCatField extends BaseRelationField
         return ['groupId' => array_values($categoryIds)];
     }
 
-    
+
     // Protected Methods
     // =========================================================================
 
