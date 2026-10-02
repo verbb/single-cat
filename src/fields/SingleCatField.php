@@ -14,6 +14,7 @@ use craft\helpers\ArrayHelper;
 use craft\helpers\Db;
 use craft\helpers\ElementHelper;
 use craft\helpers\Gql;
+use craft\services\Gql as GqlService;
 
 use GraphQL\Type\Definition\Type;
 
@@ -82,6 +83,7 @@ class SingleCatField extends BaseRelationField
             'type' => Type::listOf(CategoryInterface::getType()),
             'args' => CategoryArguments::getArguments(),
             'resolve' => CategoryResolver::class . '::resolve',
+            'complexity' => Gql::relatedArgumentComplexity(GqlService::GRAPHQL_COMPLEXITY_EAGER_LOAD),
         ];
     }
 
