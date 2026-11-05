@@ -138,6 +138,7 @@ class SingleCatField extends BaseRelationField
 
         // Render the input template
         return Craft::$app->getView()->renderTemplate($this->inputTemplate, [
+            'id' => $this->getInputId(),
             'name' => $this->handle,
             'value' => $value,
             'field' => $this,
