@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.0.4 - 2026-11-05
 
 ### Fixed
 - Fixed the field’s select having a fixed `id`, so its label didn’t focus it and multiple fields shared an ID.
